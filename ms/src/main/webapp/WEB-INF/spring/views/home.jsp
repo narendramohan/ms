@@ -7,6 +7,6 @@
 <title>Home - Multi Search page</title>
 </head>
 <body>
-
+Welcome to home
 </body>
 </html>
