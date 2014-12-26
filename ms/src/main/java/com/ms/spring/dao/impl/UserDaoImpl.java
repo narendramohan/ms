@@ -1,7 +1,9 @@
 package com.ms.spring.dao.impl;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,11 +12,10 @@ import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.ms.spring.dao.UserDao;
 import com.ms.spring.model.LoginForm;
@@ -57,10 +58,40 @@ public class UserDaoImpl implements UserDao {
 		}
 		return false;
 	}
+	
 	@Override
 	public void addUser(User user) {
+		encryptPwd(user);
 		entityManager.merge(user);
 		
+	}
+
+	private void encryptPwd(User user) {
+		String password = user.getPassword();
+		String saltStr = user.getSalt();
+		if(saltStr==null || !StringUtils.hasText(saltStr)){
+			
+			try {
+				SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+				// Salt generation 64 bits long
+				byte[] bSalt = new byte[8];
+				random.nextBytes(bSalt);
+				String encpwd = EncryptionUtil.byteToBase64(EncryptionUtil.getHash(password, bSalt));
+				user.setPassword(encpwd);
+				user.setSalt(EncryptionUtil.byteToBase64(bSalt));
+			} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public User findUserByUserName(String userId) {
+		Session session = entityManager.unwrap(Session.class);
+		Criteria query = session.createCriteria(User.class);
+		query.add(Restrictions.eq("userName", userId));
+		List<User> list = (List<User>) query.list();
+		return list.get(0);
 	}
 
 }

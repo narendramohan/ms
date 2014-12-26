@@ -98,9 +98,10 @@ public class HomeController {
 			if (isAuthentic) {
 				
 					session = request.getSession(true);
-					//session.setAttribute("user", user);
+					User user = userService.findUserByUserName(loginForm.getUserId());
+					session.setAttribute("user", user);
 					session.setAttribute("userName", loginForm.getUserId());
-					//session.setAttribute("fullName", user.getFirstName()+" "+user.getLastName());	
+					session.setAttribute("fullName", user.getFirstName()+" "+user.getLastName());	
 					return "home";
 			} else {
 				
