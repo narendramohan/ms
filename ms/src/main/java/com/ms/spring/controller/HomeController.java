@@ -90,7 +90,7 @@ public class HomeController {
             loginForm.setPassword("");
             logger.debug(model1.getAllErrors().toString());
             
-            return "login";
+            return "redirect:login";
         } else if (loginForm.getUserId() != null && loginForm.getPassword() != null) {
 			boolean isAuthentic = userService.authenticate(loginForm);
 			logger.debug(isAuthentic+"");
@@ -102,13 +102,13 @@ public class HomeController {
 					session.setAttribute("user", user);
 					session.setAttribute("userName", loginForm.getUserId());
 					session.setAttribute("fullName", user.getFirstName()+" "+user.getLastName());	
-					return "home";
+					return "redirect:home";
 			} else {
 				
 				model.addAttribute("error", "You have entered an invalid username or password!");				
 			}
 		}
-		return "login";
+		return "redirect:login";
 	}
 	
 	

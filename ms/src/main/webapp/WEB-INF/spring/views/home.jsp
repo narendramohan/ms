@@ -16,11 +16,11 @@
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		
 	</head>
-	<body>
+<body>
 		<div class="main">
-		<!----container---->
+		<!-- container -->
 		<div class="container">
-			<!----- content ----->
+			<!-- content -->
 			<div class="4-col-grids">
 				<div class="col-md-3">
 					<div class="1-col-grids">
@@ -34,14 +34,8 @@
 								<span>${user.city} | ${user.country} </span>
 							</div>
 						</div>
+						
 						<!----profile---->
-						<!---- to-day --->
-						<div class="to-day text-center">
-							<h3>TODAY</h3>
-							<h1>3</h1>
-							<span>of July 2014</span>
-						</div>
-						<!---- to-day --->
 						<!---- PIE CHART ---->
 						<div class="pie-chart">
 							<div class="pie-chrt-head">
@@ -97,134 +91,94 @@
 					</div>
 				</div>
 				<!----col-2---->
-				<div class="col-md-3">
+				<div class="col-md-6">
 					<div class="2-col-grids">
-						<%-- <!---- status ---->
+						<!---- status ---->
 						<div class="status">
-							<div class="status-head text-center">
-								<h3>JULY STATS</h3>
+							<div class="status-head text-left">
+								<h3> <div>Search on cloud:
+								    <input type="text" name="search" id="search_box" class='searchtext'/>
+								    <input type="submit" value="Search" class="styled-button-2" /></div>
+									</h3>
 							</div>
 							<!---start-chart---->
 							<!--graph-->
+							<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
+							<link rel="stylesheet" href="resources/css/ui.jqgrid.css">
+							
+							<script src="resources/js/grid.locale-en.js"></script>
+							<script src="resources/js/jquery.jqGrid.min.js"></script>
+							<script src="resources/js/jquery-ui.min.js"></script>
 							<link rel="stylesheet" href="resources/css/graph.css">
 							<script src="resources/js/jquery.flot.min.js"></script>
 							<!--//graph-->
 									<script>
 									$(document).ready(function () {
 									
-										// Graph Data ##############################################
-										var graphData = [{
-												// Returning Visits
-												data: [ [6, 4500], [7,3500], [8, 6550], [9, 7600], ],
-												color: '#59676B',
-												points: { radius: 4, fillColor: '#59676B' }
-											}
-										];
-									
-										// Lines Graph #############################################
-										$.plot($('#graph-lines'), graphData, {
-											series: {
-												points: {
-													show: true,
-													radius: 1
-												},
-												lines: {
-													show: true
-												},
-												shadowSize: 0
-											},
-											grid: {
-												color: '#59676B',
-												borderColor: 'transparent',
-												borderWidth: 10,
-												hoverable: true
-											},
-											xaxis: {
-												tickColor: 'transparent',
-												tickDecimals: false
-											},
-											yaxis: {
-												tickSize: 1200
-											}
-										});
-									
-										// Bars Graph ##############################################
-										$.plot($('#graph-bars'), graphData, {
-											series: {
-												bars: {
-													show: true,
-													barWidth: .9,
-													align: 'center'
-												},
-												shadowSize: 0
-											},
-											grid: {
-												color: '#fff',
-												borderColor: 'transparent',
-												borderWidth: 20,
-												hoverable: true
-											},
-											xaxis: {
-												tickColor: 'transparent',
-												tickDecimals: 2
-											},
-											yaxis: {
-												tickSize: 1000
-											}
-										});
-									
-										// Graph Toggle ############################################
-										$('#graph-bars').hide();
-									
-										$('#lines').on('click', function (e) {
-											$('#bars').removeClass('active');
-											$('#graph-bars').fadeOut();
-											$(this).addClass('active');
-											$('#graph-lines').fadeIn();
-											e.preventDefault();
-										});
-									
-										$('#bars').on('click', function (e) {
-											$('#lines').removeClass('active');
-											$('#graph-lines').fadeOut();
-											$(this).addClass('active');
-											$('#graph-bars').fadeIn().removeClass('hidden');
-											e.preventDefault();
-										});
-									
-										// Tooltip #################################################
-										function showTooltip(x, y, contents) {
-											$('<div id="tooltip">' + contents + '</div>').css({
-												top: y - 16,
-												left: x + 20
-											}).appendTo('body').fadeIn();
-										}
-									
-										var previousPoint = null;
-									
-										$('#graph-lines, #graph-bars').bind('plothover', function (event, pos, item) {
-											if (item) {
-												if (previousPoint != item.dataIndex) {
-													previousPoint = item.dataIndex;
-													$('#tooltip').remove();
-													var x = item.datapoint[0],
-														y = item.datapoint[1];
-														showTooltip(item.pageX, item.pageY, y+ x );
-												}
-											} else {
-												$('#tooltip').remove();
-												previousPoint = null;
-											}
-										});
+										 $("#list").jqGrid({
+								                url : "search",
+								                datatype : "json",
+								                mtype : 'POST',
+								                colNames : [ 'Id', 'FirstName', 'LastName', 'City', 'State' ],
+								                colModel : [ {
+								                        name : 'id',
+								                        index : 'id',
+								                        width : 100
+								                }, {
+								                        name : 'firstName',
+								                        index : 'firstName',
+								                        width : 150,
+								                        editable : true
+								                }, {
+								                        name : 'lastName',
+								                        index : 'lastName',
+								                        width : 150,
+								                        editable : true
+								                }, {
+								                        name : 'city',
+								                        index : 'city',
+								                        width : 100,
+								                        editable : true
+								                }, {
+								                        name : 'state',
+								                        index : 'state',
+								                        width : 100,
+								                        editable : true
+								                } ],
+								                pager : '#pager',
+								                rowNum : 10,
+								                rowList : [ 10, 20, 30 ],
+								                sortname : 'invid',
+								                sortorder : 'desc',
+								                viewrecords : true,
+								                gridview : true,
+								                caption : 'Data Report',
+								                jsonReader : {
+								                        repeatitems : false,
+								                },
+								                editurl : "search"
+								        });
+								        jQuery("#list").jqGrid('navGrid', '#pager', {
+								                edit : true,
+								                add : true,
+								                del : true,
+								                search : true
+								        });
 									
 									});
 									</script>
 							<!-- Graph HTML -->
 							<div id="graph-wrapper">
-								<div class="graph-container">
+								<!-- <div class="graph-container">
 									<div id="graph-lines"> </div>
 									<div id="graph-bars"> </div>
-								</div>
+								</div> -->
+								<table id="list">
+						                <tr>
+						                        <td />
+						                </tr>
+						        </table>
+						        <div id="pager"></div>
 							</div>
 							<!-- end Graph HTML -->
 							<!---//End-chart---->
@@ -259,54 +213,22 @@
 							</ul>
 						</div>
 						<!----- social-icons ---->
-					</div> --%>
+					</div>
 				</div>
 				<!---//col-2---->
-				<!--- col-3 ---->
-				<div class="col-md-3">
-					<div class="col-3">
-						<!---- to-day --->
-						<!-- <div class="to-day text-center">
-							<h3>TODAY</h3>
-							<h1>3</h1>
-							<span>of July 2014</span>
-						</div>
-						-- to-day -
-						-- calender --
-						<div class="calender">
-							<div class="example1" style="margin:0 auto"> </div>
-							<script src="resources/js/jquery.supercal.js"></script> 
-							<script>
-										$('.example1').supercal({
-											transition: 'carousel-vertical'
-										});
-							</script>
-
-						</div>
-						-- calender --
-						<div class="clearfix"> </div>
-						- socail-btn-col1 --
-						<div class="socail-btn-col1">
-							<ul>
-								<li><input class="face-btn" type="button" value="Facebook" /></li>
-								<li><input class="twi-btn" type="button" value="Twitter" /></li>
-								<div class="clearfix"> </div>
-							</ul>
-						</div> -->
-						<!--- socail-btn-col1 ---->
-					</div>
-				<!--- //col-3 ---->
+				
 				</div>
 				<!--- col-4 ---->
 				<div class="col-4">
 					<div class="col-md-3">
 						<!--- subscribe --->
-						<%-- <div class="subscribe-form">
-							<h4>SUBSCRIBE</h4>
-							<form>
-								<input type="text" placeholder="Enter your email" required/>
+						<div class="subscribe-form">
+							<!-- <h4>SUBSCRIBE</h4> -->
+							<form action="logout">
+								<!-- <input type="text" placeholder="Enter your email" required/>
 								<input type="password" placeholder="Enter your password" required/>
-								<input type="submit" value="SIGN UP" />
+								<input type="submit" value="SIGN UP" /> -->
+								<button type="submit" class="exit-btn exit-btn-3">Log Out</button>
 							</form>
 						</div>
 						<!--- subscribe --->
@@ -327,12 +249,12 @@
 								<li><input class="drib-btn" type="button" value="Twitter" /></li>
 								<div class="clearfix"> </div>
 							</ul>
-						</div> --%>
+						</div>
 						<!--- socail-btn-col2 ---->
 						<!---- copy-right ---->
-						<!-- <div class="copy-right">
-							<p>Multi-search <a href="home">Home</a></p>
-						</div> -->
+						<div class="copy-right">
+							<p>Template by <a href="http://w3layouts.com/">W3layouts</a></p>
+						</div>
 						<!---- copy-right ---->
 					</div>
 				</div>
@@ -340,9 +262,9 @@
 				<div class="clearfix"> </div>
 			</div>
 			</div>
-			<!----- content ----->
+			<!-- content -->
 		</div>
-		<!----container---->
+		<!-- container -->
 		</div>
 	</body>
 </html>
