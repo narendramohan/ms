@@ -6,6 +6,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src1"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -30,8 +31,12 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Narendra/Downloads/PROJPB2029BS/PROJ2029/SourceCode/Coding/privacypreserving/dist/lib/jfreechart-1.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Narendra/Downloads/PROJPB2029BS/PROJ2029/SourceCode/Coding/privacypreserving/dist/lib/swingx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Narendra/Downloads/PROJPB2029BS/PROJ2029/SourceCode/Coding/privacypreserving/dist/lib/swingx-all-1.6.5-1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Narendra/Downloads/PROJPB2029BS/PROJ2029/SourceCode/Coding/privacypreserving/dist/lib/jcommon-1.0.14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

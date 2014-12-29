@@ -45,12 +45,16 @@ public class HomeController {
 	@RequestMapping(value="/home", method={RequestMethod.GET, RequestMethod.POST})
 	public String home1(HttpSession session, @ModelAttribute("loginForm") LoginForm loginForm){
 		String userName = (String) session.getAttribute("userName");
+		User user = (User)session.getAttribute("user");
+		//logger.debug("user type"+user.getType());
 		if(userName==null || "".equals(userName)){
 			return "login";
 		}
+		else if(user!=null && user.getType()==1)  return "adminhome";
 		else return "home";
-	}	
+	}
 	
+
 	@RequestMapping(value="/login", method={RequestMethod.GET, RequestMethod.POST})
 	public String login(HttpSession session, @ModelAttribute("loginForm") LoginForm loginForm){
 		String userName = (String) session.getAttribute("userName");

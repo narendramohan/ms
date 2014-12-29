@@ -11,7 +11,7 @@ import sun.misc.*;
  *
  * @author egc10
  */
-class AesEncryption {
+public class AesEncryption {
     private static final String ALGO = "AES";
     public static String encrypt(String Data, String k) throws Exception {
         Key key = generateKey(k);
