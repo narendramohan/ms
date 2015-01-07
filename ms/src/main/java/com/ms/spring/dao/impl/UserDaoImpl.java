@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
@@ -20,6 +21,7 @@ import org.springframework.util.StringUtils;
 import com.ms.spring.dao.UserDao;
 import com.ms.spring.model.LoginForm;
 import com.ms.spring.model.User;
+import com.ms.spring.model.UserAccess;
 import com.ms.util.EncryptionUtil;
 
 @Repository(value="userDao")
@@ -92,6 +94,40 @@ public class UserDaoImpl implements UserDao {
 		query.add(Restrictions.eq("userName", userId));
 		List<User> list = (List<User>) query.list();
 		return list.get(0);
+	}
+
+	@Override
+	public void requstUserAccess(String userName) {
+		UserAccess ua = new UserAccess();
+		ua.setUserName(userName);
+		ua.setAccess("Requested");
+		entityManager.merge(ua);
+	}
+
+	@Override
+	public boolean isAlreadyRequested(String userName) {
+		try {
+			UserAccess ua = (UserAccess)entityManager.createQuery("select ua from UserAccess ua where ua.userName =:userName").setParameter("userName", userName).getSingleResult();
+			System.out.println(ua);
+			if(ua==null)
+			return false;
+			else return true;
+		} catch (NoResultException e){
+			return false;
+		}
+	}
+
+	@Override
+	public void modifyUserAccess(String userName, String access) {
+		try {
+		UserAccess ua = (UserAccess)entityManager.createQuery("select ua from UserAccess ua where ua.userName =:userName").setParameter("userName", userName).getSingleResult();
+		ua.setAccess(access);
+		
+		entityManager.merge(ua);
+		} catch (NoResultException e){
+			e.printStackTrace();
+		}
+		
 	}
 
 }

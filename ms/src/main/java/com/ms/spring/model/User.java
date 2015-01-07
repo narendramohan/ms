@@ -107,46 +107,46 @@ public class User implements Serializable {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "userName")
+	@Column(name = "userName",length=100)
 	private String userName;
 	
-	@Column(name = "password")
+	@Column(name = "password",length=100)
 	private String password;
 	
-	@Column(name = "salt")
+	@Column(name = "salt",length=1000)
 	private String salt;
 
-	@Column(name = "email")
+	@Column(name = "email",length=1000)
 	private String email;
 
-	@Column(name = "mobile")
+	@Column(name = "mobile",length=100)
 	private String mobile;
 
-	@Column(name = "firstName")
+	@Column(name = "firstName",length=1000)
 	private String firstName;
 
-	@Column(name = "lastName")
+	@Column(name = "lastName",length=1000)
 	private String lastName;
 
-	@Column(name = "address")
+	@Column(name = "address",length=1000)
 	private String address;
 	
-	@Column(name = "city")
+	@Column(name = "city",length=1000)
 	private String city;
 
-	@Column(name = "state")
+	@Column(name = "state",length=1000)
 	private String state;
 
-	@Column(name = "country")
+	@Column(name = "country",length=1000)
 	private String country;
 
-	@Column(name = "pin")
+	@Column(name = "pin",length=100)
 	private String pin;
 	
-	@Column(name = "type")
+	@Column(name = "type",length=10)
 	private int type;
 	
-	@Column(name = "status")
+	@Column(name = "status",length=10)
 	private int status;
 
 	public int getId() {

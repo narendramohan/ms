@@ -37,4 +37,22 @@ public class UserServiceImpl implements UserService {
 		return userDao.findUserByUserName(userId);
 	}
 
+	@Override
+	public void requstUserAccess(String userName) {
+		userDao.requstUserAccess(userName);
+		
+	}
+
+	@Override
+	public boolean isAlreadyRequested(String userName) {
+		return userDao.isAlreadyRequested(userName);
+		
+	}
+
+	@Override
+	public void modifyUserAccess(String userName, String access) {
+		userDao.modifyUserAccess(userName, access);
+		
+	}
+
 }

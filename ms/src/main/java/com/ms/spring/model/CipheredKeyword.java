@@ -10,16 +10,16 @@ public class CipheredKeyword {
 	@Column(name="slno")
 	String slno;
 
-	@Column(name="bookname")
+	@Column(name="bookname",length=1000)
 	String bookName;
 	
-	@Column(name="author")
+	@Column(name="author",length=1000)
 	String author;
 	
-	@Column(name="publisher")
+	@Column(name="publisher",length=1000)
 	String publisher;
 	
-	@Column(name="year")
+	@Column(name="year",length=1000)
 	String year;
 
 	public String getSlno() {

@@ -9,6 +9,7 @@
 		<link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="resources/js/jquery-1.11.2.js"></script>
+		<script src="resources/js/common.js"></script>
 		 <!-- Custom Theme files -->
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
@@ -136,10 +137,21 @@
 										$('#bitVector').click(function (){
 											keywordgrid.trigger('reloadGrid');
 										});
-										$('#bitVector1').click(function (){
-											$("#tree2").treeview({
-												url: "bitvectory"
-											})
+										$('#indexCipher').click(function (){
+											var text1 = $('#secretKey').val();
+											alert($('#secretKey').val());
+											if(!text1 || $('#secretKey').val().length<16){
+												alert('Please enter the 16 byte key!')
+											} else {
+												$.ajax({
+													url:"encryptindex",
+													 type: "POST",
+												     data: {secretKey:  $('#secretKey').val() , algo:'AES'},
+													success:function(result){
+													keywordgrid1.trigger('reloadGrid');
+												  }});
+											
+											}
 										});
 										$(function() {
 
@@ -202,7 +214,7 @@
 												}
 											};
 
-											var URL = 'listKeyowrds';
+											var URL = 'listninkeyowrds';
 											var options = {
 												url: URL,
 												editurl: URL,
@@ -249,7 +261,83 @@
 													{} // search options
 											);
 
+										$.extend($.jgrid.defaults, {
+											datatype: 'json',
+											jsonReader : {
+												repeatitems:false,
+												total: function(result) {
+													//Total number of pages
+													return Math.ceil(result.total / result.max);
+												},
+												records: function(result) {
+													//Total number of records
+													return result.total;
+												}
+											},
+											prmNames: {
+												page: "page.page",
+												rows: "page.size",
+												sort: "page.sort",
+												order: "page.sort.dir"
+											},
+											sortname: 'slno',
+											sortorder: 'asc',
+											height: 'auto',
+											viewrecords: true,
+											rowList: [10, 20, 50, 100],
+											altRows: true,
+											loadError: function(xhr, status, error) {
+												alert(error);
+											}
 										});
+
+								var URL1 = 'listindexencdata';
+								var options1 = {
+									url: URL1,
+									editurl: URL,
+									colNames : [ 'Sl No', 'Book Name', 'Author', 'Publisher', 'Year' ],
+					                colModel : [ {
+					                        name : 'slno',
+					                        index : 'slno',
+					                        width : 100
+					                }, {
+					                        name : 'bookName',
+					                        index : 'bookName',
+					                        width : 150,
+					                        editable : true
+					                }, {
+					                        name : 'author',
+					                        index : 'author',
+					                        width : 150,
+					                        editable : true
+					                }, {
+					                        name : 'publisher',
+					                        index : 'publisher',
+					                        width : 100,
+					                        editable : true
+					                }, {
+					                        name : 'year',
+					                        index : 'year',
+					                        width : 100,
+					                        editable : true
+					                } ],
+									caption: "Books",
+									pager : '#pager2',
+									height: 'auto',
+									ondblClickRow: function(id) {
+										//jQuery(this).jqGrid('editGridRow', id, editOptions);
+									}
+								};
+
+							var keywordgrid1 = 	$("#encdata").jqGrid(options1)
+										.navGrid('#pager2',
+										{}, //options
+										{} // search options
+								);
+										});
+										
+										
+										
 									});
 									
 									</script>
@@ -261,31 +349,43 @@
 								</div> -->
 								<table id="list" width="100%" class="flatTable">
 								
-									<tr align="center" class="headingTr">	
-						                        <td colspan="2">Index Ciphering</td>						            						                     
+									<tr align="center" class="headingTr" style="background-color: #418a95;">	
+						                        <th colspan="2" align="center" style="text-align: center;">Data Ciphering</th>						            						                     
 						                </tr>
 						        
 						                <tr class="normalTr" height="300px">
-						                        <td width="48%" height="300px" style="position:absolute; overflow:scroll;">
+						                        <td width="47%" height="300px" style="position:absolute; overflow:scroll;">
+												<table border="1"><tr style="border: 1;border-color: black"><td>
 												<table id="booklist">
 										                <tr>
 										                        <td />
 										                </tr>
 										        </table>
 										        <div id="pager"></div>
+										        </td></tr></table>
 												</td>
 						                        <td width="48%" height="300px" style="left:310px;position:absolute; overflow:scroll;">
-						                        	<div id="tree2">&nbsp;</div>
-						                        
+						                        	<table border="1">
+						                        		<tr style="border: 1;border-color: black"><td bgcolor="#418a95"><font size="2" color="black">Select an Algorithm: <select id="algorithmName" name="algorithmName"><option selected="selected" title="Advance Encryption Algorithm">AES</option></select> </font> </td></tr>
+						                        		<tr style="border: 1;border-color: black"><td bgcolor="#418a95"><font size="2" color="black">Enter 16 byte key: <input type="text" id="secretKey" name="secretKey" min="16" value="${secretKey}"></font></td></tr>
+						                        		<tr><td>
+						                        			<table id="encdata">
+												                <tr><td /> </tr>
+													        </table>
+													        <div id="pager2"></div>
+						                        		</td></tr>
+						                        	</table>
+						                        		
 						                        </td>						                     
 						                </tr>
 						        
 						            	<tr align="center" class="headingTr">
 						                        <td width="50%"><span id="bitVector" class="btn btn-success">Original Data</span></td>
-						                        <td width="50%"><span id="bitVector1" class="btn btn-success">Cipher Data</span></td>
+						                        <td width="50%"><span id="indexCipher" class="btn btn-success">Index Cipher</span> <span id="uploadIndex" class="btn btn-success">Upload Index</span></td>
 						                </tr>
 						       			 <tr align="center" class="headingTr" valign="bottom">
-						                        <td colspan="2" align="right" ><a href="nextindexing" class="button blue">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						       			 	<td width="50%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						                        <td width="50%"><a href="uploadData" class="btn btn-success">Upload data</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="nextindexing" class="btn btn-success">Next >></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						                </tr>
 						        </table>
 						        <!-- <div id="pager"><span id="bitVector" class="btn btn-success">Bit Vector</span> </div> -->
@@ -378,9 +478,9 @@
 								                editurl : "search"
 								        });
 								        jQuery("#list1").jqGrid('navGrid', '#pager1', {
-								                edit : true,
-								                add : true,
-								                del : true,
+								                edit : false,
+								                add : false,
+								                del : false,
 								                search : true
 								        });
 									
@@ -421,17 +521,11 @@
 							</form>
 						</div>
 						<!----//option-menu ---->
-						<!----- social-icons ---->
-						<div class="social-icons">
-							<ul>
-								<li><a class="fa" href="#"><span> </span></a></li>
-								<li><a class="gp" href="#"><span> </span></a></li>
-								<li><a class="tw" href="#"><span> </span></a></li>
-								<li><a class="db" href="#"><span> </span></a></li>
-								<div class="clearfix"> </div>
-							</ul>
+						<!---- copy-right ---->
+						<div class="copy-right">							
+							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
 						</div>
-						<!----- social-icons ---->
+						<!---- copy-right ---->
 					</div>
 				</div>
 				<!---//col-2---->
@@ -463,19 +557,24 @@
 						<!--- subscribe --->
 						<!--- socail-btn-col2 ---->
 						<div class="socail-btn-col2">
+							<input id="createUser" class="gl-btn" type="button" value="Create User" />
+							<input id="userAccess" class="drib-btn" type="button" value="User Access" />
+								<div class="clearfix"> </div>
+							
+						</div>
+						<!--- socail-btn-col2 ---->
+
+						<!----- social-icons ---->
+						<div class="social-icons">
 							<ul>
-								<li><input class="gl-btn" type="button" value="Facebook" /></li>
-								<li><input class="drib-btn" type="button" value="Twitter" /></li>
+								<li><a class="fa" href="#"><span> </span></a></li>
+								<li><a class="gp" href="#"><span> </span></a></li>
+								<li><a class="tw" href="#"><span> </span></a></li>
+								<li><a class="db" href="#"><span> </span></a></li>
 								<div class="clearfix"> </div>
 							</ul>
 						</div>
-						<!--- socail-btn-col2 ---->
-						<!---- copy-right ---->
-						<div class="copy-right">
-							<p>Template by <a href="http://w3layouts.com/">W3layouts</a></p>
-							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
-						</div>
-						<!---- copy-right ---->
+						<!----- social-icons ---->						
 					</div>
 				</div>
 				<!--- //col-4 ---->

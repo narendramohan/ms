@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Home :: Multi Search</title>
+		<title>User Access:: Multi Search</title>
 		<link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="resources/js/jquery-1.11.2.js"></script>
@@ -27,12 +27,12 @@
 					<div class="1-col-grids">
 						<!----profile---->
 						<div class="profile text-center">
-							<div class="profile-head">
-								<a href="#"><span> </span></a>
+							<div class="profile-head1">
+								<a href="#"><div> </div></a>
 							</div>
 							<div class="profile-info">
 								<h2><a href="#">${fullName}</a></h2>
-								<span>Data User |${user.city} | ${user.country} </span>
+								<span>Data Owner | ${user.city} | ${user.country} </span>
 							</div>
 						</div>
 						
@@ -94,13 +94,11 @@
 				<!----col-2---->
 				<div class="col-md-6">
 					<div class="2-col-grids">
+											
 						<!---- status ---->
 						<div class="status">
 							<div class="status-head text-left">
-								<h3> <div>Search on cloud:
-								    <input type="text" name="search" id="search_box" class='searchtext'/>
-								    <input type="submit" value="Search" class="styled-button-2" /></div>
-									</h3>
+								<h3>Grant User Access </h3>
 							</div>
 							<!---start-chart---->
 							<!--graph-->
@@ -115,51 +113,53 @@
 							<!--//graph-->
 									<script>
 									$(document).ready(function () {
-									
-										 $("#list").jqGrid({
-								                url : "search",
+										var typerenderer = function (value) {
+							                return '<a href="grantaccess?userName='+value+'" class="btn btn-success">Grant</a>&nbsp;';							                
+							            }
+										var typerenderer1 = function (value) {							                
+						                    return '<a href="denyaccess?userName='+value+'" class="btn btn-success">Deny Access</a>';						                
+						            	}
+										 $("#list1").jqGrid({
+								                url : "listallrequest",
 								                datatype : "json",
 								                mtype : 'POST',
-								                colNames : [ 'Id', 'FirstName', 'LastName', 'City', 'State' ],
+								                colNames : [ 'userName', 'Access', 'Grant?', 'Deny?' ],
 								                colModel : [ {
-								                        name : 'id',
-								                        index : 'id',
+								                        name : 'userName',
+								                        index : 'userName',
 								                        width : 100
 								                }, {
-								                        name : 'firstName',
-								                        index : 'firstName',
+								                        name : 'access',
+								                        index : 'access',
 								                        width : 150,
-								                        editable : true
-								                }, {
-								                        name : 'lastName',
-								                        index : 'lastName',
-								                        width : 150,
-								                        editable : true
-								                }, {
-								                        name : 'city',
-								                        index : 'city',
-								                        width : 100,
-								                        editable : true
-								                }, {
-								                        name : 'state',
-								                        index : 'state',
-								                        width : 100,
-								                        editable : true
-								                } ],
-								                pager : '#pager',
+								                        editable : false
+								                } , {
+							                        name : 'userName',
+							                        index : 'userName',
+							                        width : 150,
+							                        editable : false
+							                        , formatter: typerenderer
+							                	}, {
+							                        name : 'userName',
+							                        index : 'userName',
+							                        width : 150,
+							                        editable : false
+							                        , formatter: typerenderer1
+							                	}],
+								                pager : '#pager1',
 								                rowNum : 10,
 								                rowList : [ 10, 20, 30 ],
 								                sortname : 'invid',
 								                sortorder : 'desc',
 								                viewrecords : true,
 								                gridview : true,
-								                caption : 'Data Report',
+								                caption : 'User Access',
 								                jsonReader : {
 								                        repeatitems : false,
 								                },
-								                editurl : "search"
+								                editurl : "listallrequest"
 								        });
-								        jQuery("#list").jqGrid('navGrid', '#pager', {
+								        jQuery("#list1").jqGrid('navGrid', '#pager1', {
 								                edit : false,
 								                add : false,
 								                del : false,
@@ -174,12 +174,12 @@
 									<div id="graph-lines"> </div>
 									<div id="graph-bars"> </div>
 								</div> -->
-								<table id="list">
+								<table id="list1">
 						                <tr>
 						                        <td />
 						                </tr>
 						        </table>
-						        <div id="pager"></div>
+						        <div id="pager1"></div>
 							</div>
 							<!-- end Graph HTML -->
 							<!---//End-chart---->
@@ -203,12 +203,12 @@
 							</form>
 						</div>
 						<!----//option-menu ---->
-
 						<!---- copy-right ---->
 						<div class="copy-right">							
 							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
 						</div>
 						<!---- copy-right ---->
+						
 					</div>
 				</div>
 				<!---//col-2---->
@@ -238,11 +238,11 @@
 							</form>
 						</div>
 						<!--- subscribe --->
-						<br/>	
+						<br/>
 						<!--- socail-btn-col2 ---->
 						<div class="socail-btn-col2">
-							<!-- <input id="createUser" class="gl-btn" type="button" value="Create User" /> -->
-							<input id="requestAccess" class="drib-btn" type="button" value="Request Access" />
+							<input id="createUser1" class="gl-btn" type="button" value="Create User" />
+							<input id="userAccess" class="drib-btn" type="button" value="User Access" />
 								<div class="clearfix"> </div>
 							
 						</div>

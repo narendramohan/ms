@@ -40,7 +40,7 @@ public class HomeController {
 		if(userName==null || "".equals(userName)){
 			return "login";
 		}
-		else return "home";
+		else return "redirect:home";
 	}
 	@RequestMapping(value="/home", method={RequestMethod.GET, RequestMethod.POST})
 	public String home1(HttpSession session, @ModelAttribute("loginForm") LoginForm loginForm){
@@ -61,7 +61,7 @@ public class HomeController {
 		if(userName==null || "".equals(userName)){
 			return "login";
 		}
-		else return "home";
+		else return "redirect:home";
 	}	
 	/**
 	 * 

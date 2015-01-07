@@ -34,7 +34,7 @@ import com.ms.spring.validator.FileValidator;
 
 @Controller
 public class FileUploadController {
-	
+	 
     
     public @ResponseBody String provideUploadInfo() {
         return "You can upload a file by posting to this same URL.";

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class File {
+public class File { 
 		  
 		MultipartFile file;
 		

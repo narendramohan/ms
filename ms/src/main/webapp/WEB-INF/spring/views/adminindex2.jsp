@@ -9,6 +9,7 @@
 		<link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="resources/js/jquery-1.11.2.js"></script>
+		<script src="resources/js/common.js"></script>
 		 <!-- Custom Theme files -->
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
@@ -134,21 +135,25 @@
 									<script>
 									$(document).ready(function () {
 										$('#bitVector').click(function (){
+											$( "#tree1" ).empty();
 											$("#tree1").treeview({
 												url: "bitvectorp"
 											})
 										});
 										$('#binVector').click(function (){
+											$( "#tree1" ).empty();
 											$("#tree1").treeview({
 												url: "binaryvectorp"
 											})
 										});
 										$('#bitVector1').click(function (){
+											$( "#tree2" ).empty();
 											$("#tree2").treeview({
 												url: "bitvectory"
 											})
 										});
 										$('#binVector1').click(function (){
+											$( "#tree2" ).empty();
 											$("#tree2").treeview({
 												url: "binaryvectory"
 											})
@@ -178,7 +183,7 @@
 						                        <td width="50%"><span id="bitVector1" class="btn btn-success">Bit Vector</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="binVector1" class="btn btn-success">Binary Vector</span></td>
 						                </tr>
 						       			 <tr align="center" class="headingTr" valign="bottom">
-						                        <td colspan="2" align="right" ><a href="nextcipher" class="button blue">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						                        <td colspan="2" align="right" ><a href="nextcipher" class="btn btn-success">Next >></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						                </tr>
 						        </table>
 						        <!-- <div id="pager"><span id="bitVector" class="btn btn-success">Bit Vector</span> </div> -->
@@ -271,9 +276,9 @@
 								                editurl : "search"
 								        });
 								        jQuery("#list1").jqGrid('navGrid', '#pager1', {
-								                edit : true,
-								                add : true,
-								                del : true,
+								                edit : false,
+								                add : false,
+								                del : false,
 								                search : true
 								        });
 									
@@ -314,17 +319,12 @@
 							</form>
 						</div>
 						<!----//option-menu ---->
-						<!----- social-icons ---->
-						<div class="social-icons">
-							<ul>
-								<li><a class="fa" href="#"><span> </span></a></li>
-								<li><a class="gp" href="#"><span> </span></a></li>
-								<li><a class="tw" href="#"><span> </span></a></li>
-								<li><a class="db" href="#"><span> </span></a></li>
-								<div class="clearfix"> </div>
-							</ul>
+						<!---- copy-right ---->
+						<div class="copy-right">
+							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
 						</div>
-						<!----- social-icons ---->
+						<!---- copy-right ---->						
+						
 					</div>
 				</div>
 				<!---//col-2---->
@@ -354,21 +354,26 @@
 							</form>
 						</div>
 						<!--- subscribe --->
+						<br/>
 						<!--- socail-btn-col2 ---->
 						<div class="socail-btn-col2">
+							<input id="createUser" class="gl-btn" type="button" value="Create User" />
+							<input id="userAccess" class="drib-btn" type="button" value="User Access" />
+								<div class="clearfix"> </div>
+							
+						</div>
+						<!--- socail-btn-col2 ---->
+						<!----- social-icons ---->
+						<div class="social-icons">
 							<ul>
-								<li><input class="gl-btn" type="button" value="Facebook" /></li>
-								<li><input class="drib-btn" type="button" value="Twitter" /></li>
+								<li><a class="fa" href="#"><span> </span></a></li>
+								<li><a class="gp" href="#"><span> </span></a></li>
+								<li><a class="tw" href="#"><span> </span></a></li>
+								<li><a class="db" href="#"><span> </span></a></li>
 								<div class="clearfix"> </div>
 							</ul>
 						</div>
-						<!--- socail-btn-col2 ---->
-						<!---- copy-right ---->
-						<div class="copy-right">
-							<p>Template by <a href="http://w3layouts.com/">W3layouts</a></p>
-							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
-						</div>
-						<!---- copy-right ---->
+						<!----- social-icons ---->
 					</div>
 				</div>
 				<!--- //col-4 ---->

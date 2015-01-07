@@ -9,7 +9,11 @@
 		<link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="resources/js/jquery-1.11.2.js"></script>
+		<script src="resources/js/common.js"></script>
 		 <!-- Custom Theme files -->
+		<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
+		<link rel="stylesheet" href="resources/css/ui.jqgrid.css">
+		<link rel="stylesheet" href="resources/css/jquery.treeview.css">
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,9 +115,7 @@
 							</div>--%>
 							<!---start-chart---->
 							<!--graph-->
-							<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
-							<link rel="stylesheet" href="resources/css/ui.jqgrid.css">
-							<link rel="stylesheet" href="resources/css/jquery.treeview.css">
+
 							<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 							<script src="resources/js/jquery.ui.widget.js"></script>
 							<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
@@ -137,9 +139,20 @@
 											keywordgrid.trigger('reloadGrid');
 										});
 										$('#bitVector1').click(function (){
-											$("#tree2").treeview({
-												url: "bitvectory"
-											})
+											var text1 = $('#secretKey').val();
+											alert($('#secretKey').val());
+											if(!text1 || $('#secretKey').val().length<16){
+												alert('Please enter the 16 byte key!')
+											} else {
+												$.ajax({
+													url:"encryptdata",
+													 type: "POST",
+												     data: {secretKey:  $('#secretKey').val() , algo:'AES'},
+													success:function(result){
+													keywordgrid1.trigger('reloadGrid');
+												  }});
+											
+											}
 										});
 										$(function() {
 
@@ -232,7 +245,7 @@
 								                        width : 100,
 								                        editable : true
 								                } ],
-												caption: "Books",
+												caption: "Original Data",
 												pager : '#pager',
 												height: 'auto',
 												ondblClickRow: function(id) {
@@ -241,12 +254,12 @@
 											};
 
 										var keyworgrid = 	$("#booklist").jqGrid(options)
-													.navGrid('#pager',
-													{}, //options
-													editOptions,
-													addOptions,
-													delOptions,
-													{} // search options
+													.navGrid('#pager',{
+										                edit : false,
+										                add : false,
+										                del : false,
+										                search : true
+										        }
 											);
 
 										$.extend($.jgrid.defaults, {
@@ -281,7 +294,7 @@
 
 								var URL1 = 'listencdata';
 								var options1 = {
-									url: URL,
+									url: URL1,
 									editurl: URL,
 									colNames : [ 'Sl No', 'Book Name', 'Author', 'Publisher', 'Year' ],
 					                colModel : [ {
@@ -309,7 +322,7 @@
 					                        width : 100,
 					                        editable : true
 					                } ],
-									caption: "Books",
+									caption: "Cipher Data",
 									pager : '#pager2',
 									height: 'auto',
 									ondblClickRow: function(id) {
@@ -317,10 +330,13 @@
 									}
 								};
 
-							var keyworgrid1 = 	$("#encdata").jqGrid(options)
-										.navGrid('#pager2',
-										{}, //options
-										{} // search options
+							var keywordgrid1 = 	$("#encdata").jqGrid(options1)
+										.navGrid('#pager2',{
+							                edit : false,
+							                add : false,
+							                del : false,
+							                search : true
+							        }
 								);
 										});
 										
@@ -337,25 +353,24 @@
 								</div> -->
 								<table id="list" width="100%" class="flatTable">
 								
-									<tr align="center" class="headingTr">	
-						                        <td colspan="2">Data Ciphering</td>						            						                     
+									<tr align="center" class="headingTr" style="background-color: #418a95;">	
+						                        <th colspan="2" align="center" style="text-align: center;">Data Ciphering</th>						            						                     
 						                </tr>
 						        
 						                <tr class="normalTr" height="300px">
-						                        <td width="48%" height="300px" style="position:absolute; overflow:scroll;">
+						                        <td width="47%" height="300px" style="position:absolute; overflow:scroll;"><table border="1"><tr style="border: 1;border-color: black"><td>
 												<table id="booklist">
 										                <tr>
 										                        <td />
 										                </tr>
 										        </table>
-										        <div id="pager"></div>
+										        <div id="pager"></div></td></tr></table>
 												</td>
 						                        <td width="48%" height="300px" style="left:310px;position:absolute; overflow:scroll;">
-						                        	<table>
-						                        		<tr><td>Select an Algorithm: <select id="algorithmName" name="algorithmName"><option selected="selected" title="Advance Encryption Algorithm">AES</option></select>  </td></tr>
-						                        		<tr><td>Enter 16 byte key: <input type="text" id="secretKey" name="secretKey" min="16"></td></tr>
-						                        		<tr><td>Enter key: <input type="text" id="secretKey" name="secretKey"></td></tr>
-						                        		<tr><td>
+						                        	<table border="1">
+						                        		<tr style="border: 1;border-color: black"><td bgcolor="#418a95"><font size="2" color="black">Select an Algorithm: <select id="algorithmName" name="algorithmName"><option selected="selected" title="Advance Encryption Algorithm">AES</option></select> </font> </td></tr>
+						                        		<tr style="border: 1;border-color: black"><td bgcolor="#418a95"><font size="2" color="black">Enter 16 byte key: <input type="text" id="secretKey" name="secretKey" min="16" value="${secretKey}"></font></td></tr>
+						                        		<tr bordercolor="black"><td>
 						                        			<table id="encdata">
 												                <tr><td /> </tr>
 													        </table>
@@ -371,7 +386,7 @@
 						                        <td width="50%"><span id="bitVector1" class="btn btn-success">Cipher Data</span></td>
 						                </tr>
 						       			 <tr align="center" class="headingTr" valign="bottom">
-						                        <td colspan="2" align="right" ><a href="nextindexing" class="button blue">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						                        <td colspan="2" align="right" ><a href="nextindexing" class="btn btn-success">Next >></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						                </tr>
 						        </table>
 						        <!-- <div id="pager"><span id="bitVector" class="btn btn-success">Bit Vector</span> </div> -->
@@ -464,9 +479,9 @@
 								                editurl : "search"
 								        });
 								        jQuery("#list1").jqGrid('navGrid', '#pager1', {
-								                edit : true,
-								                add : true,
-								                del : true,
+								                edit : false,
+								                add : false,
+								                del : false,
 								                search : true
 								        });
 									
@@ -507,17 +522,11 @@
 							</form>
 						</div>
 						<!----//option-menu ---->
-						<!----- social-icons ---->
-						<div class="social-icons">
-							<ul>
-								<li><a class="fa" href="#"><span> </span></a></li>
-								<li><a class="gp" href="#"><span> </span></a></li>
-								<li><a class="tw" href="#"><span> </span></a></li>
-								<li><a class="db" href="#"><span> </span></a></li>
-								<div class="clearfix"> </div>
-							</ul>
+						<!---- copy-right ---->
+						<div class="copy-right">							
+							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
 						</div>
-						<!----- social-icons ---->
+						<!---- copy-right ---->
 					</div>
 				</div>
 				<!---//col-2---->
@@ -547,21 +556,27 @@
 							</form>
 						</div>
 						<!--- subscribe --->
+						<br/>
 						<!--- socail-btn-col2 ---->
 						<div class="socail-btn-col2">
+							<input id="createUser" class="gl-btn" type="button" value="Create User" />
+							<input id="userAccess" class="drib-btn" type="button" value="User Access" />
+								<div class="clearfix"> </div>
+							
+						</div>
+						<!--- socail-btn-col2 ---->
+
+						<!----- social-icons ---->
+						<div class="social-icons">
 							<ul>
-								<li><input class="gl-btn" type="button" value="Facebook" /></li>
-								<li><input class="drib-btn" type="button" value="Twitter" /></li>
+								<li><a class="fa" href="#"><span> </span></a></li>
+								<li><a class="gp" href="#"><span> </span></a></li>
+								<li><a class="tw" href="#"><span> </span></a></li>
+								<li><a class="db" href="#"><span> </span></a></li>
 								<div class="clearfix"> </div>
 							</ul>
 						</div>
-						<!--- socail-btn-col2 ---->
-						<!---- copy-right ---->
-						<div class="copy-right">
-							<p>Template by <a href="http://w3layouts.com/">W3layouts</a></p>
-							<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
-						</div>
-						<!---- copy-right ---->
+						<!----- social-icons ---->						
 					</div>
 				</div>
 				<!--- //col-4 ---->

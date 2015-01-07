@@ -11,4 +11,10 @@ public interface UserDao {
 
 	User findUserByUserName(String userId);
 
+	void requstUserAccess(String userName);
+
+	boolean isAlreadyRequested(String userName);
+
+	void modifyUserAccess(String userName, String access);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ms.spring.dao.KeywordDao;
+import com.ms.spring.model.CipheredIndexKeyword;
 import com.ms.spring.model.CipheredKeyword;
 import com.ms.spring.model.Keyword;
 import com.ms.spring.service.AdminService;
@@ -30,6 +31,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void uploadCipherKeywords(List<CipheredKeyword> list) {
 		keywordDao.uploadCipherKeywords(list);
+		
+	}
+
+	@Override
+	public void uploadCipherindexKeywords(List<CipheredIndexKeyword> cList) {
+		keywordDao.uploadCipherindexKeywords(cList);
 		
 	}
 

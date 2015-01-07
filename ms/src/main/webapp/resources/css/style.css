@@ -34,10 +34,15 @@ body a{
 	-ms-border-radius: 0.2em;
 	position:relative;
 }
-.profile-head{
-	background:url(../images/profile-header-bg.jpg) no-repeat px 0px;
-	background-size:100% 100%;
-	min-height:120px;
+.profile-head a div{
+	width: 81px;
+	height: 81px;
+	display: inline-block;
+	background: url(../images/profile-header-bg.jpg) no-repeat 0px 0px;
+	position: absolute;
+	bottom: 109px;
+	left: 100px;
+	resize: both;
 }
 .profile-head a span{
 	width: 81px;
@@ -48,6 +53,12 @@ body a{
 	bottom: 109px;
 	left: 100px;
 }
+.profile-head{
+	background:url(../images/profile-header-bg.jpg) no-repeat 0px 0px;
+	background-size:100% 100%;
+	min-height:120px;
+}
+
 .profile-head1 a div{
 	width: 81px;
 	height: 81px;
@@ -707,16 +718,15 @@ span.month{
 }
 /*----//login-form ----*/
 /*---- socail-btn-col2 ------*/
-.socail-btn-col2 ul{
+.socail-btn-col2 input{
 	margin:0;
 	padding:0;
 }
-.socail-btn-col2 ul li{
-	display:none;
+.socail-btn-col2 input{
 	padding:0;
 	margin:0;
 }
-.socail-btn-col2 ul li input[type="button"]{
+.socail-btn-col2 input[type="button"]{
 	width: 100%;
 	padding: 0.8em;
 	margin-bottom: 1.3em;
@@ -730,28 +740,41 @@ span.month{
 	-ms-transition:0.5s all;
 	cursor:pointer;
 }
-.socail-btn-col2 ul li input[type="button"].gl-btn{
-	background: url(../images/googlepluse.png) no-repeat 16px 10px #DD4B39;
+.socail-btn-col2 input[type="button"].gl-btn{
+	background: url(../images/add-user-icon.png) no-repeat 16px 10px #DD4B39;
 	border: 1px solid #DD4B39;
 	color: #FFF;
 	border-bottom: 3px solid #B93E2E;
 	border-radius: 0.2em;
 }
-.socail-btn-col2 ul li input[type="button"].gl-btn:hover{
-	background: url(../images/googlepluse.png) no-repeat 16px 10px #DD4B39;
+.socail-btn-col2 input[type="button"].gl-btn:hover{
+	background: url(../images/add-user-icon.png) no-repeat 16px 10px #DD4B39;
 	border: 1px solid #B93E2E;
 	border-bottom: 3px solid #DD4B39;
 }
 /*---*/
-.socail-btn-col2 ul li input[type="button"].drib-btn{
-	background:url(../images/dribbble.png) no-repeat 16px 10px#F26797;
+.socail-btn-col2 input[type="button"].drib-btn{
+	background:url(../images/security-key-blue.png) no-repeat 16px 10px#F26797;
 	border: 1px solid #F26797;
 	color: #FFF;
 	border-bottom: 3px solid #D25B85;
 	border-radius: 0.2em;
 }
-.socail-btn-col2 ul li input[type="button"].drib-btn:hover{
-	background:url(../images/dribbble.png) no-repeat 16px 10px#F26797;
+.socail-btn-col2 input[type="button"].drib-btn:hover{
+	background:url(../images/security-key-blue.png) no-repeat 16px 10px#F26797;
+	border: 1px solid #D25B85;
+	border-bottom: 3px solid #F26797;
+}
+/*---*/
+.socail-btn-col2 input[type="button"].home-btn{
+	background:url(../images/home-icon.gif) no-repeat 16px 10px#F26797;
+	border: 1px solid #F26797;
+	color: #FFF;
+	border-bottom: 3px solid #D25B85;
+	border-radius: 0.2em;
+}
+.socail-btn-col2 input[type="button"].home-btn:hover{
+	background:url(../images/home-icon.gif) no-repeat 16px 10px#F26797;
 	border: 1px solid #D25B85;
 	border-bottom: 3px solid #F26797;
 }
@@ -759,7 +782,7 @@ span.month{
 .copy-right{
 	text-align:right;
 	
-	display: none;
+	display: block;
 }
 .copy-right p{
 	color:#59676B;
@@ -1097,12 +1120,6 @@ box-shadow: inset 0 1px 2px #90C5A9;
 }
 
 
-*{  
-  margin:0;
-  padding:0;
-  font-family:Lato;
-}
-
 
 .flatTable{  
   width:100%;
@@ -1114,7 +1131,7 @@ box-shadow: inset 0 1px 2px #90C5A9;
   
   tr{
     height:50px;
-    background:#f6f3f7 - #222;
+    background:#f6f3f7;
     border-bottom:rgba(0,0,0,.05) 1px solid;
   }
   
@@ -1147,7 +1164,7 @@ box-shadow: inset 0 1px 2px #90C5A9;
 
 .headingTr{
     height:30px;
-    background:#418a95 + #222;
+    background:#418a95;
     color:#f6f3f7; 
     font-size:8pt;
     border:0px solid;
@@ -1155,7 +1172,7 @@ box-shadow: inset 0 1px 2px #90C5A9;
 } 
 .normalTr{
     height:30px;
-    background:#418a95 + #222;
+    background:#418a95;
     color:#f6f3f7; 
     font-size:8pt;
     border:0px solid;
@@ -1190,7 +1207,7 @@ box-shadow: inset 0 1px 2px #90C5A9;
   right:-400px;
   width:400px;
   height:100%; 
-  background:#f6f3f7 - #222;  
+  background:#f6f3f7;  
   overflow:hidden;  
   transition:width 1s, right .3s;
   padding:0px;
@@ -1249,7 +1266,7 @@ box-shadow: inset 0 1px 2px #90C5A9;
 }
 
 .settingsIcon:hover{
-  background: #418a95 - #222;
+  background: #418a95;
 }
 
 tr:nth-child(3){

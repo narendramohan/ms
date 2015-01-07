@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="keyword")
-public class Keyword { 
+@Entity(name="CipheredIndexKeyword")
+public class CipheredIndexKeyword {
 	@Id
-	@Column(name="slno",length=10)
+	@Column(name="slno")
 	String slno;
 
 	@Column(name="bookname",length=1000)
@@ -61,7 +61,6 @@ public class Keyword {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
 	
 	
 }

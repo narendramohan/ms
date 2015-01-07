@@ -206,5 +206,10 @@
 </div>
 <div class="clear"> </div>
 </div>
+<!---- copy-right ---->
+<div class="copy-right">							
+	<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-140845209387668453' height=55 width=660 scrolling='no' frameborder=0></iframe>
+</div>
+<!---- copy-right ---->
 </body>
 </html>

@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 import com.ms.spring.model.File;
 
 
-public class FileValidator implements Validator {
+public class FileValidator implements Validator { 
 	public boolean supports(Class<?> paramClass) {
 		return File.class.equals(paramClass); 
 	}

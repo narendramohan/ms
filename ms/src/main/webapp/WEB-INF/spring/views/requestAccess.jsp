@@ -11,7 +11,9 @@
 		<script src="resources/js/jquery-1.11.2.js"></script>
 		<script src="resources/js/common.js"></script>
 		 <!-- Custom Theme files -->
+		 <link rel="stylesheet" href="resources/css/rstyle.css" />
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+		
    		 <!-- Custom Theme files -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -96,93 +98,83 @@
 					<div class="2-col-grids">
 						<!---- status ---->
 						<div class="status">
-							<div class="status-head text-left">
-								<h3> <div>Search on cloud:
-								    <input type="text" name="search" id="search_box" class='searchtext'/>
-								    <input type="submit" value="Search" class="styled-button-2" /></div>
-									</h3>
-							</div>
-							<!---start-chart---->
-							<!--graph-->
-							<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
-							<link rel="stylesheet" href="resources/css/ui.jqgrid.css">
-							
-							<script src="resources/js/grid.locale-en.js"></script>
-							<script src="resources/js/jquery.jqGrid.min.js"></script>
-							<script src="resources/js/jquery-ui.min.js"></script>
-							<link rel="stylesheet" href="resources/css/graph.css">
-							<script src="resources/js/jquery.flot.min.js"></script>
-							<!--//graph-->
-									<script>
-									$(document).ready(function () {
-									
-										 $("#list").jqGrid({
-								                url : "search",
-								                datatype : "json",
-								                mtype : 'POST',
-								                colNames : [ 'Id', 'FirstName', 'LastName', 'City', 'State' ],
-								                colModel : [ {
-								                        name : 'id',
-								                        index : 'id',
-								                        width : 100
-								                }, {
-								                        name : 'firstName',
-								                        index : 'firstName',
-								                        width : 150,
-								                        editable : true
-								                }, {
-								                        name : 'lastName',
-								                        index : 'lastName',
-								                        width : 150,
-								                        editable : true
-								                }, {
-								                        name : 'city',
-								                        index : 'city',
-								                        width : 100,
-								                        editable : true
-								                }, {
-								                        name : 'state',
-								                        index : 'state',
-								                        width : 100,
-								                        editable : true
-								                } ],
-								                pager : '#pager',
-								                rowNum : 10,
-								                rowList : [ 10, 20, 30 ],
-								                sortname : 'invid',
-								                sortorder : 'desc',
-								                viewrecords : true,
-								                gridview : true,
-								                caption : 'Data Report',
-								                jsonReader : {
-								                        repeatitems : false,
-								                },
-								                editurl : "search"
-								        });
-								        jQuery("#list").jqGrid('navGrid', '#pager', {
-								                edit : false,
-								                add : false,
-								                del : false,
-								                search : true
-								        });
-									
-									});
-									</script>
-							<!-- Graph HTML -->
-							<div id="graph-wrapper">
-								<!-- <div class="graph-container">
-									<div id="graph-lines"> </div>
-									<div id="graph-bars"> </div>
-								</div> -->
-								<table id="list">
-						                <tr>
-						                        <td />
-						                </tr>
-						        </table>
-						        <div id="pager"></div>
-							</div>
-							<!-- end Graph HTML -->
-							<!---//End-chart---->
+							<div class="tab style-1">
+		    					<dl>
+		 			              <dd class="messages"><a class="user active" href="#tab1" > </a></dd>
+		    						<!--  <dd class="messages"><a class="msg" href="#tab2"> </a></dd>
+		    						<dd class="settings"><a class="setting" href="#tab3"> </a></dd>
+		    						<dd class="likes"><a class="like" href="#tab4"> </a></dd>  -->
+		    					</dl>
+		    					<ul>
+		    						<li class="active">
+					    				<div class="top-grids">
+							      			<div class="top-grid1">
+							      				<img src="resources/images/like1.png" title="" alt="">
+							      			</div>
+							      			<div class="top-grid2">
+								      			<!-- <a href="#single.html"><h4>Saketh<h4></h4></a> -->
+								      			<p><h5>Your access request successfully sent. </h5></p>
+							      			</div>
+							      			
+		      							</div>   		
+										<div class="clear"> </div>
+									</li>
+		    						<li><div class="form">
+					    					<%-- <form:form action="register" method="POST" commandName="user">		
+												<form:input path="firstName"  class="active textbox" value="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'First Name';}"/>
+												<form:input path="lastName"  class="textbox" value="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Last Name';}"/>
+												<form:input path="email"  class="textbox" value="Email Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}"/>
+												<form:input path="userName"  class="textbox" value="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}"/>
+												<form:password path="password" class="textbox" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}"/>
+												<input type="password" class="textbox" value="Email Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}"/>
+												<input type="submit" value="Register">
+												</form:form> --%>
+									    </div>
+									</li>
+		    						<li>
+		    							<div class="settings">
+			    							<a href="#single.html"><h5><img src="images/arrow1.png" title="" alt="">Profile</h5></a>
+			    							<a href="#single.html"><h5><img src="images/arrow1.png" title="" alt="">Edit</h5></a>
+			    							<a href="#single.html"><h5><img src="images/arrow1.png" title="" alt="">Create Account</h5></a>
+			    							<a href="#single.html"><h5><img src="images/arrow1.png" title="" alt="">Login</h5></a>
+			    							<a href="#single.html"><h5><img src="images/arrow1.png" title="" alt="">Signup</h5></a>
+		    							</div>
+		    						</li>
+		    						<li>
+							    		<div class="top-grids">
+							      			<div class="top-grid1">
+							      				<img src="images/f1.jpg" title="" alt="">
+							      			</div>
+							      			<div class="top-grid2">
+								      			<a href="#single.html"><h4>Saketh<h4></h4></a>
+								      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+							      			</div>
+							      			 <div class="top-grid1">
+							      				<img src="images/f2.jpg" title="" alt="">
+							      			</div>
+							      			<div class="top-grid2">
+								      			<a href="#single.html"><h4>Amar<h4></h4></a>
+								      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+							      			</div>
+							      			 <div class="top-grid1">
+							      				<img src="images/f3.jpg" title="" alt="">
+							      			</div>
+							      			<div class="top-grid2">
+								      			<a href="#single.html"><h4>Akil<h4></h4></a>
+								      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+							      			</div>
+							      			 <div class="top-grid1">
+							      				<img src="images/f4.jpg" title="" alt="">
+							      			</div>
+							      			<div class="top-grid2">
+								      			<a href="#single.html"><h4>Naveen<h4></h4></a>
+								      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+							      			</div>
+							      		</div>    		
+										<div class="clear"> </div>
+		    						</li>
+		    					</ul>
+								</div>
 						</div>
 						<!---- status ---->
 						<!---- option-menu ---->
@@ -241,8 +233,8 @@
 						<br/>	
 						<!--- socail-btn-col2 ---->
 						<div class="socail-btn-col2">
-							<!-- <input id="createUser" class="gl-btn" type="button" value="Create User" /> -->
-							<input id="requestAccess" class="drib-btn" type="button" value="Request Access" />
+							<!-- <input id="createUser" class="gl-btn" type="button" value="Create User" home-icon.gif/> -->
+							<input id="homebtn" class="home-btn" type="button" value="home" />
 								<div class="clearfix"> </div>
 							
 						</div>
