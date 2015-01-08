@@ -299,6 +299,19 @@ public class MSController {
 		
 	}
 	
+	@RequestMapping (value="getcomarison")
+	public String getComarison(HttpSession session){
+		String userName = (String) session.getAttribute("userName");
+		
+		//logger.debug("user type"+user.getType());
+		if(userName==null || "".equals(userName)){
+			return "redirect:login";
+		}
+		else {
+			return "dashboard";
+		}
+		
+	}	
 	
 	@Resource 
 	private UserAccessRepository userAccessRepository;

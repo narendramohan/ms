@@ -2,6 +2,7 @@ package com.ms.spring.dao;
 
 import com.ms.spring.model.LoginForm;
 import com.ms.spring.model.User;
+import com.ms.spring.model.UserAccess;
 
 public interface UserDao {
 
@@ -16,5 +17,7 @@ public interface UserDao {
 	boolean isAlreadyRequested(String userName);
 
 	void modifyUserAccess(String userName, String access);
+
+	UserAccess getUserAccess(String userName);
 
 }

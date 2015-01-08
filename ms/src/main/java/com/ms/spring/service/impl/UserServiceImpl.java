@@ -6,11 +6,12 @@ import org.springframework.stereotype.Service;
 import com.ms.spring.dao.UserDao;
 import com.ms.spring.model.LoginForm;
 import com.ms.spring.model.User;
+import com.ms.spring.model.UserAccess;
 import com.ms.spring.service.UserService;
 
 @Service(value="userService")
 public class UserServiceImpl implements UserService {
-
+	
 	@Autowired
 	UserDao userDao;
 	
@@ -54,5 +55,8 @@ public class UserServiceImpl implements UserService {
 		userDao.modifyUserAccess(userName, access);
 		
 	}
-
+	public boolean isUserHasAccess(String userName){
+		UserAccess ua = userDao.getUserAccess(userName);
+		return (ACCESS_GRANTED.equalsIgnoreCase(ua.getAccess()));
+	}
 }

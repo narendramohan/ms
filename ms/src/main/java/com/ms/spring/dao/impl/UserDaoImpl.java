@@ -130,4 +130,15 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	@Override
+	public UserAccess getUserAccess(String userName) {
+		try {
+			UserAccess ua = (UserAccess)entityManager.createQuery("select ua from UserAccess ua where ua.userName =:userName").setParameter("userName", userName).getSingleResult();
+			return ua;
+			} catch (NoResultException e){
+				e.printStackTrace();
+			}
+		return new UserAccess();
+	}
+
 }

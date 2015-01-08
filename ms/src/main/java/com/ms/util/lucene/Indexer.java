@@ -10,6 +10,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexDeletionPolicy;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -37,7 +39,7 @@ public class Indexer {
 		this.indexDirectory = indexDirectory ;
 		this.dataDirectory = dataDirectory ;
 	}
-	
+	Directory fsDirectory;
 	/**
 	 * This method creates an instance of IndexWriter which is used
 	 * to add Documents and write indexes on the disc.
@@ -95,13 +97,13 @@ public class Indexer {
 			 */
 			
 			Field senderField =
-				new Field("sender",sender,Field.Store.YES,Field.Index.NOT_ANALYZED);
+				new StringField("sender",sender,Field.Store.YES);
 			
 			Field receiverfield = 
-				new Field("receiver",receiver,Field.Store.NO,Field.Index.NOT_ANALYZED);
+				new StringField("receiver",receiver,Field.Store.NO);
 			
 			Field subjectField = 
-				new Field("subject",subject,Field.Store.YES,Field.Index.ANALYZED);
+				new StringField("subject",subject,Field.Store.YES);
 			
 			if(subject.toLowerCase().indexOf("pune") != -1){
 				// Display search results that contain pune in their subject first by setting boost factor
@@ -109,17 +111,16 @@ public class Indexer {
 			}
 			
 			Field emaildatefield = 
-				new Field("date",date,Field.Store.NO,Field.Index.NOT_ANALYZED); 
+				new StringField("date",date,Field.Store.NO); 
 			
 			Field monthField = 
-				new Field("month",month,Field.Store.NO,Field.Index.NOT_ANALYZED); 
+				new StringField("month",month,Field.Store.NO); 
 			
 			Field messagefield = 
-				new Field("message",message,Field.Store.NO,Field.Index.ANALYZED);
+				new StringField("message",message,Field.Store.NO);
 			
 			Field emailDocField =
-				new Field("emailDoc",emaildoc,Field.Store.YES,
-						Field.Index.NO);
+				new StringField("emailDoc",emaildoc,Field.Store.YES);
 			
 			// Add these fields to a Lucene Document
 			Document doc = new Document();

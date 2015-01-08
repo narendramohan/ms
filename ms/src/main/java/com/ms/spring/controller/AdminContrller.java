@@ -29,6 +29,7 @@ import com.ms.spring.vo.ViewPage;
 @Controller
 public class AdminContrller {
 
+	
 	@RequestMapping(value="/createuser")
 	public String createUser(HttpSession session, HttpServletRequest request){
 		String userName = (String) session.getAttribute("userName");
@@ -107,7 +108,7 @@ public class AdminContrller {
 		}
 		else if(user!=null && user.getType()==1){
 			String userName1 = request.getParameter("userName");
-			userService.modifyUserAccess(userName1, "Access Granted");
+			userService.modifyUserAccess(userName1, userService.ACCESS_GRANTED);
 			request.setAttribute("user", user);
 			return "redirect:useraccess";
 		} else return "redirect:home";		

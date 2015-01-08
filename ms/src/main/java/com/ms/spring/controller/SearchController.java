@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -15,12 +17,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
+
+
+
+
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ms.spring.dao.KeywordRepository;
 import com.ms.spring.model.JqGridModel;
 import com.ms.spring.model.Keyword;
 import com.ms.spring.service.AdminService;
+import com.ms.spring.service.SearchService;
+import com.ms.spring.service.UserService;
 import com.ms.spring.vo.ViewPage;
 
 @Controller
@@ -74,8 +83,22 @@ public class SearchController {
         //response.getWriter().print(jsonArray);
 		return jsonArray;
 	}
+	@Autowired
+	UserService userService;
+	@Autowired
+	SearchService searchService;
 	
-	
-	
+	@RequestMapping (value="searchbook")
+	public @ResponseBody String searchBook(HttpServletRequest request, HttpSession session){
+		String userName = (String) session.getAttribute("userName");
+		String searchon = request.getParameter("searchon");
+		String search = request.getParameter("search");
+		boolean hasAccess = userService.isUserHasAccess(userName);
+		if(hasAccess) {
+			String result = searchService.searchBook(searchon, search);
+			return result;
+		} else
+		return "Nothing to show for Search text: "+search+", and selected radio: "+searchon;
+	}
 
 }

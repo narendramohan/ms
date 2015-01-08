@@ -15,6 +15,9 @@ $(document).ready(function () {
 		document.location.href='requestaccess';
 	});	
 	
+	$('#dashbtn').click (function(){
+		document.location.href='getcomarison';
+	});	
 	//request access "requestAccess"
 	$('#homebtn').click (function(){
 		document.location.href='home';

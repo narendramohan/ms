@@ -778,6 +778,19 @@ span.month{
 	border: 1px solid #D25B85;
 	border-bottom: 3px solid #F26797;
 }
+/*---*/
+.socail-btn-col2 input[type="button"].dash-btn{
+	background:url(../images/View_charts.png) no-repeat 16px 10px#615687;
+	border: 1px solid #615680;
+	color: #FFF;
+	border-bottom: 3px solid #615680;
+	border-radius: 0.2em;
+}
+.socail-btn-col2 input[type="button"].dash-btn:hover{
+	background:url(../images/bar_chart.png) no-repeat 16px 10px#615687;
+	border: 1px solid #615687;
+	border-bottom: 3px solid #615687;
+}
 /*---- copy-right ----*/
 .copy-right{
 	text-align:right;

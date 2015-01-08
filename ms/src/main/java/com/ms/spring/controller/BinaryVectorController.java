@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ms.util.lucene.LuceneSearch;
 import com.ms.spring.model.Keyword;
 import com.ms.spring.model.LoginForm;
 import com.ms.spring.service.AdminService;
@@ -82,6 +83,7 @@ public class BinaryVectorController {
 			blist.add(k);
 			
 		}
+		LuceneSearch.analyzeAndIndexJob(list);
 		session.setAttribute("alt", alt);
 		session.setAttribute("alp", alp);
 		session.setAttribute("ala", ala);
